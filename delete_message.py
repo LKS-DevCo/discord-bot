@@ -36,6 +36,9 @@ async def on_message(message):
         full_string = message.content
         delete_num = full_string.removeprefix(delete)
         await message.channel.send('deleting....' + delete_num)
+        await message.delete()  # deletes message that was typed by user
+        # TODO: Delete messages before this as well
+
 
     if message.content.startswith('$name'):
         await message.channel.send(GUILD)
