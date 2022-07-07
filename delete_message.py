@@ -32,7 +32,10 @@ async def on_message(message):
     # TODO: Should send help reply showing what can be done with bot
 
     if message.content.startswith(delete):
-        await message.channel.send('deleting....')
+        # TODO: Assign as int type and request that many messages be delete + 1 (includes the bot message)
+        full_string = message.content
+        delete_num = full_string.removeprefix(delete)
+        await message.channel.send('deleting....' + delete_num)
 
     if message.content.startswith('$name'):
         await message.channel.send(GUILD)
