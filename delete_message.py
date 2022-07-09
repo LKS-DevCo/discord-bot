@@ -32,13 +32,16 @@ async def on_message(message):
     # TODO: Should send help reply showing what can be done with bot
 
     if message.content.startswith(delete):
-        # TODO: Assign as int type and request that many messages be delete + 1 (includes the bot message)
         full_string = message.content
         delete_num = full_string.removeprefix(delete)
         await message.channel.send('deleting....' + delete_num)
-        await message.delete()  # deletes message that was typed by user
-        # TODO: Delete messages before this as well
-
+        # Deletes message that was sent by user
+        await message.delete()
+        # Convert to int to be used in argument for purging
+        delete_num = int(delete_num)
+        c_channel = discord.utils.get(message.guild.text_channels, name='bot-test')
+        deleted = await c_channel.purge(limit=delete_num)
+        await c_channel.send('Deleted {} message(s)'.format(len(deleted)))
 
     if message.content.startswith('$name'):
         await message.channel.send(GUILD)
