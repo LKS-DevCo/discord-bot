@@ -26,11 +26,16 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
+    # Main HELP Menu
     if message.content == prefix:
-        await message.channel.send("HELP REPLY")
-    # TODO: Should send help reply showing what can be done with bot
+        spacing = "\t\t\t\t\t" # Standardize spacing for help commands
+        await message.channel.send("For more information on a specific command, type HELP command-name")
+        await message.channel.send("delete" + spacing + "Deletes one or more messages")
+    # HELP menu for each command #
+    if message.content == delete:
+        await message.channel.send("```lks delete [number to delete]```")
 
+    # End of HELP menu for each command #
     # Deletes number of messages specified by user after lks delete prefix is detected
     if message.content.startswith(delete):
         full_string = message.content

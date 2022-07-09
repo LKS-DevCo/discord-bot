@@ -1,16 +1,20 @@
-# This is a sample Python script.
+import discord
+# print(discord.__version__)
+intents = discord.Intents.default()
+# intents.message_content = True
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+client = discord.Client(intents=intents)
 
+@client.event
+async def on_ready():
+    print(f'We have logged in as {client.user}')
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
 
+    if message.content.startswith('#'):
+        await message.channel.send('My name is Stephon!')
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+client.run('OTk0MjMzODE1NTExODcxNTc5.Gn8vvG.u855DtyTfgTbuvHYhWiF9nSZcsYsJ8I4GSCOcQ')
